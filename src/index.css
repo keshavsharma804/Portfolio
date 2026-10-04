@@ -1,0 +1,782 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-bg: var(--pf-bg);
+  --color-bg-elevated: var(--pf-bg-elevated);
+  --color-surface: var(--pf-surface);
+  --color-surface-hover: var(--pf-surface-hover);
+  /*
+   * Elevation ladder. Five named levels, each visibly distinct, so a card can
+   * state how far forward it sits instead of every panel sharing one flat fill.
+   * s0 is the page/inset, s1 a resting card, s2 raised, s3 interactive hover,
+   * s4 focused or selected.
+   */
+  --color-elev-0: var(--pf-elev-0);
+  --color-elev-1: var(--pf-elev-1);
+  --color-elev-2: var(--pf-elev-2);
+  --color-elev-3: var(--pf-elev-3);
+  --color-elev-4: var(--pf-elev-4);
+  --color-line: var(--pf-line);
+  --color-line-strong: var(--pf-line-strong);
+  --color-fg: var(--pf-fg);
+  --color-fg-muted: var(--pf-fg-muted);
+  --color-fg-subtle: var(--pf-fg-subtle);
+  --color-accent: var(--pf-accent);
+  /* Fill variant of the accent, for surfaces that carry a light label. */
+  --color-accent-solid: var(--pf-accent-solid);
+  --color-accent-soft: var(--pf-accent-soft);
+  --color-accent-2: var(--pf-accent-2);
+  --color-accent-3: var(--pf-accent-3);
+  --color-success: var(--pf-success);
+  --color-warning: var(--pf-warning);
+  --color-danger: var(--pf-danger);
+  --color-ring: var(--pf-ring);
+
+  --text-display-xl: clamp(2.75rem, 1.55rem + 5.2vw, 6rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-lg: clamp(2.25rem, 1.5rem + 3.3vw, 4.25rem);
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: -0.035em;
+  --text-h1: clamp(2rem, 1.42rem + 2.4vw, 3.25rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h2: clamp(1.7rem, 1.35rem + 1.5vw, 2.5rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.025em;
+  --text-h3: clamp(1.3rem, 1.15rem + 0.7vw, 1.625rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h4: clamp(1.075rem, 1.03rem + 0.2vw, 1.2rem);
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: -0.015em;
+  --text-body-lg: clamp(1.0625rem, 1.02rem + 0.22vw, 1.1875rem);
+  --text-body-lg--line-height: 1.62;
+  /*
+   * Primary reading size for long-form paragraphs. The scale used to jump
+   * straight from 12px metadata to 40px+ headings, so body copy had no
+   * comfortable step and almost every paragraph rendered at 12-14px.
+   */
+  --text-read: clamp(1rem, 0.97rem + 0.16vw, 1.0625rem);
+  --text-read--line-height: 1.7;
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.55;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-2xs: 0.75rem;
+  --text-2xs--line-height: 1.45;
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  --shadow-soft: var(--pf-shadow-soft);
+  --shadow-lifted: var(--pf-shadow-lifted);
+  /*
+   * Elevation shadows are theme-scoped rather than fixed black. In light mode a
+   * neutral-black shadow over an off-white page reads as dirt; a navy-tinted
+   * one at lower alpha reads as lift. This is the only way to separate a white
+   * card from a near-white page, since the two can never differ in luminance.
+   */
+  --shadow-elev-1: var(--pf-shadow-1);
+  --shadow-elev-2: var(--pf-shadow-2);
+  --shadow-elev-3: var(--pf-shadow-3);
+  --shadow-glow: 0 0 0 1px var(--pf-accent-line), 0 12px 40px -12px var(--pf-accent-glow);
+
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  --spacing-section: clamp(3.25rem, 1.9rem + 4.6vw, 5.75rem);
+  --spacing-gutter: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
+  --spacing-nav: 4.5rem;
+
+  --z-content: 10;
+  --z-nav: 60;
+  --z-rail: 70;
+  --z-dropdown: 80;
+  --z-overlay: 100;
+  --z-modal: 120;
+  --z-toast: 140;
+  --z-cursor: 200;
+  --z-boot: 220;
+}
+
+:root {
+  color-scheme: dark;
+
+  --pf-bg: #04060b;
+  --pf-bg-elevated: #080b14;
+  --pf-surface: rgb(255 255 255 / 0.03);
+  --pf-surface-hover: rgb(255 255 255 / 0.055);
+  --pf-line: rgb(255 255 255 / 0.07);
+  --pf-line-strong: rgb(255 255 255 / 0.14);
+  --pf-fg: #e9eef8;
+  --pf-fg-muted: #97a1b5;
+  /*
+   * Was #6a7488, which measures 4.31:1 on --pf-bg and fails WCAG AA for the
+   * small text it is actually used for. It carried 288 text nodes, so this was
+   * the single largest legibility problem in the theme. Nudged again from
+   * #7b869c because this token also sits on the lightest elevated surfaces,
+   * where it measured 4.21:1.
+   */
+  --pf-fg-subtle: #828da3;
+  --pf-accent: #4d7cfe;
+  /*
+   * The brand accent is tuned to read as *text* on a near-black page, which
+   * leaves it too light to carry a white label: white on #4d7cfe is 3.73:1.
+   * Solid fills behind white text use this deeper sibling instead, so buttons
+   * clear 4.5:1 without dragging the whole accent identity darker.
+   */
+  --pf-accent-solid: #3f6ae0;
+  --pf-accent-soft: rgb(77 124 254 / 0.14);
+  --pf-accent-2: #7c5cff;
+  --pf-accent-3: #2ee6c5;
+  --pf-success: #2ee6c5;
+  --pf-warning: #f5b544;
+  --pf-danger: #ff5c6c;
+  --pf-ring: #7c9dff;
+  --pf-accent-line: rgb(124 157 255 / 0.4);
+  --pf-accent-glow: rgb(77 124 254 / 0.35);
+  --pf-header: rgb(4 6 11 / 0.72);
+  --pf-grid-line: rgb(255 255 255 / 0.045);
+  --pf-glass: rgb(255 255 255 / 0.09);
+  --pf-glass-strong: rgb(255 255 255 / 0.16);
+  --pf-glass-edge: rgb(255 255 255 / 0.24);
+  --pf-glass-specular: rgb(255 255 255 / 0.3);
+
+  /* Elevation ladder: additive light, so a higher step always reads as nearer. */
+  --pf-elev-0: rgb(255 255 255 / 0.02);
+  --pf-elev-1: rgb(255 255 255 / 0.035);
+  --pf-elev-2: rgb(255 255 255 / 0.055);
+  --pf-elev-3: rgb(255 255 255 / 0.08);
+  --pf-elev-4: rgb(255 255 255 / 0.11);
+
+  --pf-shadow-soft: 0 1px 2px rgb(0 0 0 / 0.24), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  --pf-shadow-lifted: 0 2px 4px rgb(0 0 0 / 0.24), 0 24px 56px -20px rgb(0 0 0 / 0.66);
+  --pf-shadow-1: 0 1px 2px rgb(0 0 0 / 0.3);
+  --pf-shadow-2: 0 2px 6px -1px rgb(0 0 0 / 0.34), 0 12px 28px -14px rgb(0 0 0 / 0.55);
+  --pf-shadow-3: 0 4px 10px -2px rgb(0 0 0 / 0.36), 0 28px 60px -22px rgb(0 0 0 / 0.7);
+
+  /*
+   * The terminal is a self-contained device, not a themed surface. It keeps a
+   * dark shell in both themes and carries its own foreground tokens, because
+   * the page foreground cannot be read on it: light --pf-fg-muted is navy and
+   * measured 2.65:1 against this background.
+   */
+  --pf-term-bg: #05070d;
+  --pf-term-fg: #dfe6f2;
+  --pf-term-muted: #9aa6bd;
+  --pf-term-dim: #7b869c;
+  --pf-term-prompt: #2ee6c5;
+  --pf-term-path: #7fa4ff;
+  --pf-term-label: #a894ff;
+  --pf-term-ok: #6ee7b7;
+  --pf-term-line: rgb(255 255 255 / 0.1);
+  --pf-term-chrome: rgb(255 255 255 / 0.06);
+
+  /* Texture: white-only overlays are invisible on a light page. */
+  --pf-scanline: rgb(255 255 255 / 0.02);
+  --pf-grain-opacity: 0.16;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --pf-bg: #f6f7fb;
+  --pf-bg-elevated: #ffffff;
+  --pf-surface: rgb(12 18 32 / 0.026);
+  --pf-surface-hover: rgb(12 18 32 / 0.05);
+  /*
+   * Borders carry more weight in light mode because fills cannot: a white card
+   * on #f6f7fb is only 1.07:1, so separation has to come from the edge and the
+   * shadow. 0.09 -> 0.12 lifts the visible edge from 1.20:1 to 1.29:1.
+   */
+  --pf-line: rgb(12 18 32 / 0.12);
+  --pf-line-strong: rgb(12 18 32 / 0.2);
+  --pf-fg: #0b1020;
+  --pf-fg-muted: #4a5468;
+  /* Was #6d7688 at 4.27:1, below AA. Now 5.4:1 on white, 5.0:1 on the page. */
+  --pf-fg-subtle: #5f6879;
+  --pf-accent: #2a55cf;
+  --pf-accent-solid: #2a55cf;
+  --pf-accent-soft: rgb(42 85 207 / 0.1);
+  --pf-accent-2: #5c37d8;
+  --pf-accent-3: #0e9e86;
+  --pf-success: #08705f;
+  --pf-warning: #b57508;
+  --pf-danger: #d93a48;
+  --pf-ring: #2f5fe0;
+  --pf-accent-line: rgb(42 85 207 / 0.35);
+  --pf-accent-glow: rgb(42 85 207 / 0.22);
+  --pf-header: rgb(246 247 251 / 0.75);
+  --pf-grid-line: rgb(12 18 32 / 0.055);
+  /*
+   * Was rgb(255 255 255 / 0.9), a white border on a near-white page: 1.06:1,
+   * i.e. the glass panels had no visible boundary at all. A tinted edge plus a
+   * white inner specular keeps the material read while making it real.
+   */
+  --pf-glass: rgb(255 255 255 / 0.72);
+  --pf-glass-strong: rgb(255 255 255 / 0.88);
+  --pf-glass-edge: rgb(12 18 32 / 0.1);
+  --pf-glass-specular: rgb(255 255 255 / 1);
+
+  /*
+   * Light mode elevates by getting whiter, not brighter. Only the top two
+   * steps carry a fill, because anything else reads as a grey smudge; steps 3
+   * and 4 are shadow-only so hover and focus stay as lifts.
+   */
+  --pf-elev-0: rgb(12 18 32 / 0.028);
+  --pf-elev-1: rgb(255 255 255 / 0.92);
+  --pf-elev-2: rgb(255 255 255 / 1);
+  --pf-elev-3: rgb(255 255 255 / 1);
+  --pf-elev-4: rgb(247 249 253 / 1);
+
+  --pf-shadow-soft: 0 1px 2px rgb(12 18 32 / 0.05), 0 6px 18px -10px rgb(12 18 32 / 0.1);
+  --pf-shadow-lifted: 0 2px 6px -1px rgb(12 18 32 / 0.06), 0 20px 44px -18px rgb(12 18 32 / 0.16);
+  --pf-shadow-1: 0 1px 2px rgb(12 18 32 / 0.05), 0 4px 10px -6px rgb(12 18 32 / 0.1);
+  --pf-shadow-2: 0 2px 4px -1px rgb(12 18 32 / 0.05), 0 10px 24px -12px rgb(12 18 32 / 0.13);
+  --pf-shadow-3: 0 4px 8px -2px rgb(12 18 32 / 0.06), 0 22px 46px -18px rgb(12 18 32 / 0.18);
+
+  /* Terminal keeps its dark shell; only the frame around it changes. */
+  --pf-term-line: rgb(12 18 32 / 0.1);
+  --pf-term-chrome: rgb(12 18 32 / 0.04);
+
+  /* Navy-tinted texture at low alpha: the dark theme's white overlay is a
+     no-op here, so the scanline and grain variables carry a real value. */
+  --pf-scanline: rgb(12 18 32 / 0.022);
+  --pf-grain-opacity: 0.055;
+}
+
+@layer base {
+  * {
+    border-color: var(--pf-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--pf-bg);
+    color: var(--pf-fg);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    color: var(--pf-fg);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--pf-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--pf-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Plain view: recruiters get the content without the showreel. */
+  [data-plain='on'] *,
+  [data-plain='on'] *::before,
+  [data-plain='on'] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-plain='on'] [data-fx='decorative'] {
+    display: none !important;
+  }
+
+  [data-plain='on'] [data-fx='tilt'] {
+    transform: none !important;
+  }
+}
+
+/* Konami-code disco mode. */
+[data-discos='on'] {
+  --pf-accent: #ff4d9d;
+  --pf-accent-2: #ffd24d;
+  --pf-accent-3: #4dffd2;
+  --pf-accent-line: rgb(255 77 157 / 0.5);
+  --pf-accent-glow: rgb(255 210 77 / 0.4);
+  transition: --pf-accent 400ms linear;
+}
+
+[data-discos='on'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-content);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: conic-gradient(
+    from var(--disco-angle, 0deg),
+    transparent 0deg,
+    rgb(255 77 157 / 0.1) 40deg,
+    transparent 80deg,
+    rgb(255 210 77 / 0.1) 160deg,
+    transparent 220deg,
+    rgb(77 255 210 / 0.1) 300deg,
+    transparent 360deg
+  );
+  animation: disco-spin 6s linear infinite;
+}
+
+@keyframes disco-spin {
+  to {
+    --disco-angle: 360deg;
+  }
+}
+
+@property --disco-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--pf-scanline) 0px,
+    var(--pf-scanline) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-page, 78rem);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/*
+ * Tailwind's `z-*` utilities are static values, not a @theme namespace, so
+ * declaring --z-nav in @theme emits nothing. Every semantic layer below has to
+ * be registered with @utility or the class silently resolves to z-index: auto
+ * and stacked sections paint over the fixed nav.
+ */
+@utility z-content {
+  z-index: 10;
+}
+@utility z-nav {
+  z-index: 60;
+}
+@utility z-rail {
+  z-index: 70;
+}
+@utility z-dropdown {
+  z-index: 80;
+}
+@utility z-overlay {
+  z-index: 100;
+}
+@utility z-modal {
+  z-index: 120;
+}
+@utility z-toast {
+  z-index: 140;
+}
+@utility z-cursor {
+  z-index: 200;
+}
+@utility z-boot {
+  z-index: 220;
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--pf-fg) 0%,
+    color-mix(in oklab, var(--pf-accent) 85%, white) 42%,
+    var(--pf-accent-2) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-glass {
+  background-color: var(--pf-glass);
+  backdrop-filter: blur(16px) saturate(165%);
+  -webkit-backdrop-filter: blur(16px) saturate(165%);
+  border: 1px solid var(--pf-glass-edge);
+  box-shadow:
+    inset 0 1px 0 0 var(--pf-glass-specular),
+    inset 0 -1px 0 0 rgb(0 0 0 / 0.18),
+    0 12px 32px -18px rgb(0 0 0 / 0.6);
+}
+
+/** Frosted pane: needs colour behind it for the blur to read as glass. */
+@utility glass-pane {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--pf-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--pf-glass-edge);
+  box-shadow:
+    inset 0 1px 0 0 var(--pf-glass-specular),
+    inset 1px 0 0 0 var(--pf-glass-strong),
+    inset -1px 0 0 0 var(--pf-glass-strong),
+    inset 0 -1px 0 0 rgb(0 0 0 / 0.2),
+    0 16px 40px -20px rgb(0 0 0 / 0.65);
+}
+
+/** Specular streak across the top edge of a glass surface. */
+@utility glass-sheen {
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--pf-glass-specular) 18%,
+      var(--pf-glass-specular) 82%,
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 12%;
+    top: 0;
+    height: 45%;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.09), transparent);
+    pointer-events: none;
+  }
+}
+
+@utility hairline-top {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pf-line-strong), transparent);
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.9), transparent 60%);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    background: radial-gradient(circle at 50% 50%, transparent, transparent 70%);
+  }
+}
+
+@keyframes rgb-split {
+  0%,
+  100% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: -2px 0 var(--pf-accent), 2px 0 var(--pf-accent-3);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(12px, -22px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/*
+ * Data particles travelling along an SVG connector.
+ *
+ * This has to be a CSS keyframe rather than a JS tween: `offset-distance` is
+ * the property that actually moves an element along an `offset-path`, and a
+ * library animating any other key here (e.g. `pathOffset`) silently does
+ * nothing. Driving it in CSS also hands the motion to the compositor and lets
+ * the reduced-motion block below switch it off by duration alone.
+ */
+@keyframes flow-particle {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@utility animate-flow {
+  animation: flow-particle 2.6s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, var(--pf-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pf-grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--pf-grid-line) 1px, transparent 0);
+  background-size: 26px 26px;
+}
+
+/* Film grain: keeps large flat gradients from banding. */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Overlay blending is almost a no-op on a light page, so the theme carries
+       the strength: 0.16 in dark, 0.055 in light. */
+    opacity: var(--pf-grain-opacity);
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+}
+
+/*
+ * Elevation utilities. Each names one rung of the ladder from index.css so a
+ * card states its own height instead of picking an arbitrary white alpha.
+ */
+@utility elev-0 {
+  background-color: var(--pf-elev-0);
+}
+@utility elev-1 {
+  background-color: var(--pf-elev-1);
+}
+@utility elev-2 {
+  background-color: var(--pf-elev-2);
+}
+@utility elev-3 {
+  background-color: var(--pf-elev-3);
+}
+@utility elev-4 {
+  background-color: var(--pf-elev-4);
+}
+
+/**
+ * Resting card. In dark this is a faint additive lift; in light it is a white
+ * panel that needs a shadow to read at all, since white on #f6f7fb is 1.07:1.
+ */
+@utility card-surface {
+  background-color: var(--pf-elev-1);
+  border: 1px solid var(--pf-line);
+  box-shadow: var(--pf-shadow-1);
+  transition:
+    background-color 240ms var(--ease-standard),
+    border-color 240ms var(--ease-standard),
+    box-shadow 240ms var(--ease-standard);
+}
+
+/** Raised panel: modal, expanded card, sticky header. */
+@utility card-raised {
+  background-color: var(--pf-elev-2);
+  border: 1px solid var(--pf-line);
+  box-shadow: var(--pf-shadow-3);
+}
+
+/** Inset well: code, metrics tracks, anything that reads as a depression. */
+@utility card-inset {
+  background-color: var(--pf-elev-0);
+  border: 1px solid var(--pf-line);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.12);
+}
+
+[data-theme='light'] .card-inset {
+  box-shadow: inset 0 1px 2px rgb(12 18 32 / 0.05);
+}
+
+@utility edge-fade {
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 20%, transparent 78%);
+}
+
+@utility animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes border-spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Animated gradient border for featured panels. */
+@utility ring-animated {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle),
+      var(--pf-accent),
+      var(--pf-accent-3),
+      var(--pf-accent-2),
+      var(--pf-accent)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: border-spin 6s linear infinite;
+  }
+}

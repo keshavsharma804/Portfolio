@@ -1,0 +1,8 @@
+import { useContext } from 'react'
+import { CommandPaletteContext, type CommandPaletteContextValue } from './command-palette-context'
+
+export function useCommandPalette(): CommandPaletteContextValue {
+  const context = useContext(CommandPaletteContext)
+  if (!context) throw new Error('useCommandPalette must be used within CommandPaletteProvider')
+  return context
+}

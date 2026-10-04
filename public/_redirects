@@ -1,0 +1,4 @@
+# `/resume` is generated at build time as `resume.html`. Netlify and Cloudflare
+# Pages both read this file; the 200 rewrite keeps the clean extension-less URL
+# without a redirect hop. Other hosts need the equivalent rule — see README.
+/resume  /resume.html  200
