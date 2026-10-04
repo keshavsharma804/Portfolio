@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Portfolio/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#04060b" />
+    <meta
+      name="description"
+      content="Keshav Sharma — Full-Stack AI Developer building RAG, agentic and GenAI systems with Python, FastAPI and React."
+    />
+    <title>Keshav Sharma — Full-Stack AI Developer</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('pf-theme')
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+          }
+          document.documentElement.dataset.theme = theme
+          document.documentElement.style.colorScheme = theme
+          var locale = localStorage.getItem('pf-locale')
+          if (locale === 'hi' || locale === 'en') {
+            document.documentElement.lang = locale
+          }
+        } catch (e) {}
+      })()
+    </script>
+    <script type="module" crossorigin src="/Portfolio/assets/index-CdNmU060.js"></script>
+    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-CXWS11xD.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
